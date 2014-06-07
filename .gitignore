@@ -1,1 +1,3 @@
 wa.egg-info
+*.pyc
+*.egg

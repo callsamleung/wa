@@ -1,10 +1,11 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1'
+#version = '0.1'
 
 setup(name='wa',
-      version=version,
+#      version=version,
+      version=':versiontools:wa:',
       description="wa is a flask-based web site develop solution.",
       long_description="""\
 """,
@@ -17,6 +18,9 @@ setup(name='wa',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
+      setup_requires=[
+          'versiontools>=1.8',
+          ],
       install_requires=[
           # -*- Extra requirements: -*-
           'Flask',
@@ -28,5 +32,7 @@ setup(name='wa',
       ],
       entry_points="""
       # -*- Entry points: -*-
+      [abu.admin]
+      wa = wa.admin:Admin
       """,
       )

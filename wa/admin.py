@@ -1,19 +1,26 @@
 #!/usr/bin/env python
 # -*- coding:utf8 -*-
 import os
+import uuid
 
 from string import Template
 
 import pkg_resources
+import versiontools
 import abu.admin
+
+import wa
 
 
 class Admin(abu.admin.Interface):
     def version(self):
-        return '0.0.1'
+        return str(versiontools.Version.from_tuple(wa.__version__))
 
     def init(self, path):
         settings = {}
+
+        settings['secret_key'] = str(uuid.uuid4())
+
         t = raw_input('Debug Mode [n]:')
         settings['debug'] = 'True' if t.lower() == 'y' else 'False'
         t = raw_input('Port [5000]:')
@@ -27,8 +34,8 @@ class Admin(abu.admin.Interface):
         settings['db_user'] = t if t.strip() else 'root'
         t = raw_input('MySQL Password:')
         settings['db_pwd'] = t
-        t = raw_input('MySQL Database Name [gdcaihui]:')
-        settings['db_dbname'] = t if t.strip() else 'gdcaihui'
+        t = raw_input('MySQL Database Name [wa]:')
+        settings['db_dbname'] = t if t.strip() else 'wa'
 
         a2wsgi = {}
         t = raw_input('Apache2 Virtual Host Port[80]:')
@@ -42,17 +49,17 @@ class Admin(abu.admin.Interface):
 
         with open(os.path.join(path, 'settings.py'), 'w') as fd:
             fd.write(pkg_resources.resource_string(
-                'caihui.official',
+                'wa',
                 'config_templates/settings.py.template') % settings)
 
         with open(os.path.join(path, 'run'), 'w') as fd:
             fd.write(pkg_resources.resource_string(
-                'caihui.official',
+                'wa',
                 'config_templates/run.template'))
 
         with open(os.path.join(path, 'apache2.conf'), 'w') as fd:
             fd.write(Template(pkg_resources.resource_string(
-                'caihui.official',
+                'wa',
                 'config_templates/apache2.wsgi.conf.template')).substitute(a2wsgi))
 
         if not os.path.exists(os.path.join(path, 'log')):
