@@ -9,16 +9,9 @@ __all__ = ('PluginInterface',
         'create_app',
         )
 
-app = None
-
 def create_app(config_file):
-    global app
-    if app is not None:
-        sys.exit('A wa application is already initialized.')
     app = App(__name__)
     app.config.from_pyfile(config_file)
-    app.init()
+    app.init_plugins()
     return app
-
-
 

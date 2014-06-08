@@ -14,8 +14,9 @@ class PluginFinder(object):
                     yield i.load()
         else:
             for i in pkg_resources.iter_entry_points(self._group, self._name):
+                print i
                 yield i.load()
 
-    def plugin(self, prj):
-        return pkg_resource.load_entry_point(prj, self._group, self._name)
+    def plugin(self, prj, name):
+        return pkg_resources.load_entry_point(prj, self._group, name)
 
