@@ -22,9 +22,9 @@ DB_DATABASE = 'wa'
 
 UPLOADS_DIR = os.path.join(here, 'uploads')
 
-WA_PLUGINS = {
+WA_PLUGINS = [
         ('watest', 'watest_index'),
-        }
+        ]
 
 WA_INDEX_PLUGIN = ('watest', 'watest_index')
 WA_ADMIN_PLUGIN = ('watest', 'watest_index')
