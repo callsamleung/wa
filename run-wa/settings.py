@@ -24,9 +24,10 @@ UPLOADS_DIR = os.path.join(here, 'uploads')
 
 WA_PLUGINS = [
         ('watest', 'watest_index'),
+        ('logsss', 'logsss_index2'),
         ]
 
 WA_INDEX_PLUGIN = ('watest', 'watest_index')
 WA_ADMIN_PLUGIN = ('watest', 'watest_index')
-
-
+WA_LOGSSS_INDEX_PLUGIN = ('logsss', 'logsss_index2')
+WA_LOGSSS_ADMIN_PLUGIN = ('logsss', 'logsss_index2')

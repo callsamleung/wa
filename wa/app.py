@@ -16,6 +16,17 @@ class App(Flask):
             plg = self._install_plugin(pf, prj, plugin)
             for bp, reg_args in plg.blueprints():
                 self.register_blueprint(bp, **reg_args)
+        # install LOGSSS index plugin
+        if self.config['WA_LOGSSS_INDEX_PLUGIN']:
+            plg = self._install_plugin(pf, *self.config['WA_LOGSSS_INDEX_PLUGIN'])
+            bp, reg_args = plg.index_blueprint()
+            self.register_blueprint(bp, **reg_args)
+            print 'sssssssssssssssssssssssssssssssssss'
+        # install LOGSSS admin plugin
+        if self.config['WA_LOGSSS_ADMIN_PLUGIN']:
+            plg = self._install_plugin(pf, *self.config['WA_LOGSSS_ADMIN_PLUGIN'])
+            bp, reg_args = plg.admin_blueprint()
+            self.register_blueprint(bp, **reg_args)
         # install index plugin
         if self.config['WA_INDEX_PLUGIN']:
             plg = self._install_plugin(pf, *self.config['WA_INDEX_PLUGIN'])
@@ -26,6 +37,7 @@ class App(Flask):
             plg = self._install_plugin(pf, *self.config['WA_ADMIN_PLUGIN'])
             bp, reg_args = plg.admin_blueprint()
             self.register_blueprint(bp, **reg_args)
+            print 'ssssssssssssssssssssss222222222222222222222'
        
     def _install_plugin(self, pf, prj, plugin=None):
         plugin_class = pf.plugin(prj, plugin)
