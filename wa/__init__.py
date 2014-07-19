@@ -11,7 +11,7 @@ __all__ = ('PluginInterface',
 
 def create_app(config_file):
     app = App(__name__)
-    app.config.from_pyfile(config_file)
+#    app.config.from_pyfile(config_file)
     app.init_plugins()
     return app
 
