@@ -4,11 +4,16 @@
 import os
 
 from wa import create_app
-from wa.wa_link import views
+from wa.wa_link.views import WAViewLink
 
 here = os.path.dirname(os.path.realpath(__file__))
 config_file = os.path.join(here, 'settings.py')
 app = create_app(config_file)
+
+@app.route('/lll/')
+def wa_link():
+    v = WAViewLink()
+    return v.get_link(1).link
 
 if __name__ == '__main__':
     app.run(
